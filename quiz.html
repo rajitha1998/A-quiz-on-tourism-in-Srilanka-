@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+
+<html >
+<head>
+    
+    <title>Ceylon Vibes-Quiz</title>
+    <link rel="stylesheet" type="text/css" href="Rajitha-CSS/quiz.css">
+	
+</head>
+<body background="Rajitha-images/bgimage.jpg"> 
+  <div id="container">
+    <div id="content">
+        <div id="quiz">  <!-- This div contains the quiz (four buttons for the options to choose answers ,one button to check answers ,paragraphs to display questions and the remaining time)-->
+            <p id="time"></p>
+            <p id="questionNo"></p>
+            <p id="question"></p>
+            <p id="timeStatus"></p>
+            <button id="Checker" onclick="showAnswers()">Check Answers</button> <!--this button allows the user   to check answers after the quiz is over or the time is over-->
+
+            <button id="one" onclick="buttonOne()"></button> 
+            <br />
+            <button id="two" onclick=" buttonTwo()"></button>    <!--These four buttons are use for two purposes (To display the answer options and to select it)-->
+            <br />
+            <button id="three" onclick=" buttonThree()"></button>
+            <br />
+            <button id="four" onclick=" buttonFour()"></button>
+        </div>
+    </div>
+
+    <div id="quizAnswers"> <!--this div is used to display the correct answers and the selected answers are correct or wrong   (this div will be displayed after cliking the check answers button)-->
+        <div id="numbers"></div>
+        <div id="answers"></div>
+        <div id="status"></div>
+        <div id="questionsPrint"></div>
+    </div>
+  </div>
+	
+ <script>
+     var code;
+     var timeMinuts = 3;   //vaiable is the minuts of time
+	 var timeSeconds = 30;   //vaiable is the seconds of time
+     var marks = 0;        // this variable contains the quiz mark of the user
+     var i = 0;            //this variable is used to change the questions succesfully 
+     var questions = new Array("Have you visited Sri Lanka before ?", "What is a world heritage site from the following Rainforests?" ,
+         "Which country has the highest density of elephants in Asia? ", "Where is the  highest population density of leopards in the world?",
+         "Select the historical ancient building with unbelievable technologies.", "What is the best beach in Sri Lanka?", "What is the best beach to surf in Sri Lanka?",
+         "Where can you find beautiful nature views in Sri lanka?", "Do you believe Whales and Dolphins exist in Sri lankan sea?",
+         "Where is the Sacred Tooth of Lord Gautama Buddha is preserved in? ");//this array contains the questions of the quiz
+
+     //bellow four arrays contains the answer options to each question
+     var answers1 = new Array("Yes", "Yasuni National park ", "Thailand", "Yala National Park,Sri Lanka", "Taj-mahal,India", "Induruwa", "Induruwa", "Colombo", "Yes", "Borobudur,Indonisia");
+     var answers2 = new Array("No", "Tongass National Forest", "Sri Lanka", "The village of Bera,India", "Sigiriya,Srilanka", "Arugam Bay", "Arugam Bay","Ella","No","Sri Dalada Maligawa,Sri Lanka");
+     var answers3 = new Array(null, "Hoh", "India", "Qinghai,china", "Agra Fort,India", "Unawatuna", "Unawatuna", "Galle", null, "Mahabodhi Temple,India");
+     var answers4 = new Array(null, "Sinharaja", "Nepal", "Udawalawa national park,Sri Lanka", "Potala Palace,Tibet", "Mirissa", "Mirissa", "Jaffna", null, "Ruwanwalimahasaya,Sri Lanka");
+
+     var correctAns = new Array("Yes", "Sinharaja", "Sri Lanka", "Yala National Park,Sri Lanka", "Sigiriya,Srilanka", "Unawatuna", "Arugam Bay", "Ella", "Yes", "Sri Dalada Maligawa,Sri Lanka");
+     //above array contains the correct answers of the question
+     var selectedAns = new Array("Not-given", "Not-given", "Not-given", "Not-given", "Not-given", "Not-given", "Not-given", "Not-given", "Not-given", "Not-given");
+     //the above array contains the values whether the users anser is correct , incorrect or the answer is not given.
+    
+     questionChanger();//calling the question changer function
+     timer();//calling the timer function
+
+     /*buttoneOne, buttonTwo ,buttonThree, buttonFour functions are used to check whether the selected answer is correct 
+     if so increase marks by 2 if not decrease marks by 1  and also the question changing function will be called,
+      i is increased by 1 to get the next options in the array*/
+     function buttonOne() {                      
+         if (answers1[i] == correctAns[i]) {
+             marks = marks + 2;
+             selectedAns[i] = "Correct";
+         }
+         else {
+             marks = marks - 1;
+             selectedAns[i] = "In-Correct";
+         }
+         i = i + 1;
+         questionChanger();
+     }
+     function buttonThree() {
+         if (answers3[i] == correctAns[i]) {
+             marks = marks + 2;
+             selectedAns[i] =  "Correct";
+         }
+         else {
+             marks = marks - 1;
+             selectedAns[i] = "In-Correct";
+         }
+         i = i + 1;
+         questionChanger();
+     }
+     function buttonFour() {
+         if (answers4[i] == correctAns[i]) {
+             marks = marks + 2;
+             selectedAns[i] =  "Correct";
+         }
+         else {
+             marks = marks - 1;
+             selectedAns[i] = "In-Correct";
+         }
+         i = i + 1;
+         questionChanger();
+     }
+     function buttonTwo() {
+         if (answers2[i] == correctAns[i]) {
+             marks = marks + 2;
+             selectedAns[i] =  "Correct";
+         } else {
+             marks = marks - 1;
+             selectedAns[i] = "In-Correct";
+         }
+         i = i + 1;
+         questionChanger();
+     }
+     
+      /*the below function will be chainging the question and the answer after the user selects an answer,
+      when the questions are over used time will be displayed and printStatus function is called */
+     function questionChanger() {
+         buttonHandler(answers3[i], "three");
+         buttonHandler(answers4[i], "four");
+         if (i < correctAns.length) {
+             document.getElementById("questionNo").innerHTML = "Question " +(i + 1);
+             document.getElementById("question").innerHTML =  questions[i];
+             document.getElementById("one").innerHTML = answers1[i];
+             document.getElementById("two").innerHTML = answers2[i];
+             document.getElementById("three").innerHTML = answers3[i];
+             document.getElementById("four").innerHTML = answers4[i];
+             
+         } else {
+             printStatus();
+             clearInterval(code);
+             var totalTime = 210 - (timeMinuts * 60 + timeSeconds);
+             var usedMinutes = 0;
+             var usedSeconds = 0;
+             while(totalTime >= 60){
+                 totalTime = totalTime - 60;
+                 usedMinutes = usedMinutes + 1;
+
+            }
+            usedSeconds = totalTime;
+            document.getElementById("time").innerHTML = "Questions over ";
+            document.getElementById("timeStatus").innerHTML = "You have used " + usedMinutes + " m " + usedSeconds + " s";
+
+         }
+        
+
+     }
+     //if there is only two or three options for the answer the extra button/buttons are hide by this function
+     function buttonHandler(ans,type) {
+         if (ans == null) {
+             document.getElementById(type).style.visibility = "hidden";
+         } else {
+             document.getElementById(type).style.visibility = "visible";
+         }
+     }
+
+     //timer function is used to change the time value,display it  and also stop the quiz if the remainig time is zero
+     function timer() {
+           code  =  setInterval(function () {
+           document.getElementById("time").innerHTML = "Time-left " + "  " + timeMinuts + " m " + timeSeconds + " s";
+           if (timeMinuts == 0 && timeSeconds == 0) {
+               clearInterval(code);
+               printStatus();
+               document.getElementById("timeStatus").innerHTML = "Time up (Session expired)";
+
+           }
+		   if (timeMinuts != 0 && timeSeconds == 0) {
+		       timeMinuts = timeMinuts - 1;
+               timeSeconds = 60;
+
+           }
+		   
+             timeSeconds = timeSeconds - 1;
+         }, 1000);
+
+     }
+     //color function is used to change the background colour according to the marks of the user
+     function color(){
+	     document.body.style.backgroundImage = "none";
+         if(marks < -1){
+            document.body.style.backgroundColor = "red";
+         }else if(marks < 8){
+            document.body.style.backgroundColor = "yellow";
+         }else{
+            document.body.style.backgroundColor = "green";
+         }
+     }
+     //prinstatus function is used to display the score and remove the answer option buttons and display the check answers option
+     function printStatus() {
+         document.getElementById("Checker").style.display = "block";
+         document.getElementById("question").style.fontSize = "30px";
+         document.getElementById("questionNo").remove();
+         document.getElementById("one").remove();
+         document.getElementById("two").remove();
+         document.getElementById("three").remove();
+         document.getElementById("four").remove();
+         color();
+         document.getElementById("question").innerHTML = "Your score is   " + marks;
+         
+     }
+     //the bellow function will display the selected answer is correct , incoorect or notgiven along with the question and correct answer
+     function showAnswers(){
+        var answerStatus = "ANSWER-STATUS" + "<br>" + "<br>";
+        var correct = "EXPECTED ANSWER" + "<br>" + "<br>";
+        var questionNums = "QUESTION NUMBER" + "<br>" + "<br>";
+        var questionPrint = "QUESTION" + "<br>" + "<br>";
+        var j;
+        for (j = 0; j < 10; j++) {
+            answerStatus +=  selectedAns[j] + "<br>" + "<br>" ;
+            questionNums += (j+1) + "<br>" + "<br>";
+            correct += correctAns[j]+ "<br>" + "<br>";
+            questionPrint  += questions[j]+ "<br>" + "<br>";
+            
+        }
+        
+        document.body.style.backgroundImage = "url('Rajitha-Images/bgimage.jpg')";
+        document.getElementById("quizAnswers").style.display = "grid";
+        document.getElementById("timeStatus").style.width = "500px";
+        document.getElementById("timeStatus").style.textAlign = "left";
+        document.getElementById("numbers").innerHTML = questionNums;
+        document.getElementById("answers").innerHTML = correct;
+        document.getElementById("status").innerHTML = answerStatus;
+        document.getElementById("questionsPrint").innerHTML = questionPrint;
+        document.getElementById("quiz").remove();
+        
+     }
+ </script>
+</body>
+</html>

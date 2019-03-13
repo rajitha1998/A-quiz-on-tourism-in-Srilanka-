@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+     
+      <title>Main-Page</title>
+	  <style>
+         
+          #content{
+              width: auto;
+              height: auto;
+              opacity: 0.8;       
+          }
+          #container{
+              padding-top: 12%;
+              margin-left: auto;
+              margin-right: auto;
+              width: 75%;
+              display: grid;
+              grid-template-areas:
+              'description description description description' /*using a css grid to format the elemets in the site */
+              'student1 student2 student3 student4'
+              '. info info .';
+              grid-gap: 40px;
+
+             
+          }
+          #description{
+              grid-area: description;
+              margin-left: auto;
+              margin-right: auto;
+              font-size: 40px;
+              font-family: "Century Gothic";
+          }
+        
+          .student{
+              width: auto;
+              text-align: center;
+              border: solid;
+              border-radius: 8px;
+          }
+          .student:hover{
+              opacity: 0.95;           /*changing the opacity of the image on mouse over*/
+              border-color:#00b3b3; /* changing the border colour on mouse over*/
+              border-width: 3px;
+              
+          }
+          #s_one{
+              grid-area: student1;
+          }
+
+          #s_two{
+              grid-area: student2;
+          }
+          #s_three{
+              grid-area: student3;
+          }
+          #s_four{
+              grid-area: student4;
+          }
+          #information{
+             transition: 0.2s; /*using a transition for height in the information div*/
+             grid-area: info;
+             border: solid;
+             border-color: black;
+             text-align: center;
+             border-radius: 10px;
+             font-family: Arial;
+             font-size: 18px;
+              
+          }
+          #container2{
+              width: 75%;
+              margin-left: auto;
+              margin-right: auto;
+          }
+         body{
+            background-image: url("Rajitha-images/wall.jpg"); 
+         }
+          
+      </style>
+    </head>
+    
+	<body >
+        <header>
+        <div id="container">
+              <div id="description">
+                  FOUNDERS OF CEYLON VIBES 
+              </div> 
+              <!--The four divs bellow contains the images of students -->
+            <div class="student" id="s_one">
+                <img src="Rajitha-images/sanka.jpg" height="270px" width="250px"><br>
+                
+            </div>
+            <div class="student" id="s_two">
+                <img src="Rajitha-images/sumal.jpg" height="270px" width="250px"><br>
+                
+            </div>
+            <div class="student" id="s_three">
+                <img src="Rajitha-images/rajitha.jpg" height="270px" width="250px"><br>
+                
+            </div>
+            <div class="student" id="s_four">
+                <img src="Rajitha-images/nandun.jpg" height="270px" width="250px"><br>
+            </div>
+
+            <div id="information"> <!--div to display the student name and the role-->
+
+            </div>
+            
+        </div>
+        
+        <script>
+            //on mousover functions to display the name and the roll of the member 
+            document.getElementById("s_one").onmouseover = function() {mouseOverOne()};
+            document.getElementById("s_two").onmouseover = function() {mouseOverTwo()};
+            document.getElementById("s_three").onmouseover = function() {mouseOverThree()};
+            document.getElementById("s_four").onmouseover = function() {mouseOverFour()};
+            document.getElementById("s_one").onmouseout = function() {mouseOut()};
+            document.getElementById("s_two").onmouseout = function() {mouseOut()};
+            document.getElementById("s_three").onmouseout = function() {mouseOut()};
+            document.getElementById("s_four").onmouseout = function() {mouseOut()};
+
+            //Clearing the div when mouse out  and setting the height of the div to zero
+            function mouseOut(){
+                document.getElementById("information").style.height = "0px";
+                document.getElementById("information").innerHTML = "";
+                
+            }
+            //function to display the name and role of student 1 and setting the height of th div
+            function mouseOverOne() {
+                document.getElementById("information").innerHTML = "Student 1" +"<br>"   + "Sanka Wanniarachchi";
+                document.getElementById("information").style.height = "40px";
+            }
+            //function to display the name and role of student 2 and setting the height of th div
+            function mouseOverTwo() {
+                document.getElementById("information").innerHTML = "Student 2"  +"<br>"  + "Kevin Sumal Perera";
+                document.getElementById("information").style.height = "40px";
+            }
+             //function to display the name and role of student 3 and setting the height of th div
+            function mouseOverThree() {
+                document.getElementById("information").innerHTML = "Student 3" + "<br>"  + "Rajitha Warusavitarana";
+                document.getElementById("information").style.height = "40px";
+            } 
+             //function to display the name and role of student 4 and setting the height of th div
+            function mouseOverFour() {
+                document.getElementById("information").innerHTML = "Student 4" +"<br>"  + "Thathsara Pathirage";
+                document.getElementById("information").style.height = "40px";
+            }
+            </script>
+            
+    </body>
+</html>

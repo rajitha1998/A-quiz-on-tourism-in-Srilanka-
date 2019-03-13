@@ -1,0 +1,124 @@
+﻿#content{                
+    width:50%;
+    height:100%;                
+    margin-left:auto;           /*centering the div */
+    margin-right:auto;          /* centering the div*/
+	background-color:white;
+	opacity:0.95;               /*making the div transparent */
+}
+#container{
+	padding-top:10%;            /*keeping the space for navigation */
+	
+}
+
+#quiz {                        
+    margin-top:20px;
+    border-style: solid;       /*using a boder for the quiz */
+    width:auto;
+    margin-right: auto;        
+    margin-left: auto;
+    text-align:center;
+	border-radius:8px;         /*decorating the border edges */
+
+}
+#question {                   
+    padding-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-family: Calibri;
+    font-size: large;
+    color: #484b4f;
+}
+
+h2{
+    text-align:center;
+}
+button {                      
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.5s;     /*adding a transition for button */
+    background-color: #008CBB;   /*blue colour background for button */
+    color: white;
+    width:75%;
+}
+    button:hover {            
+    
+        background-color: #240a72; /*changing the background colour of the button in hover */
+        color: white;
+        border-color: #008CBB;
+    }
+#time {                       
+    text-align: center;
+    border-style: dotted;
+    width: 150px;
+    height: 20px;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+#timeStatus {                 
+    font-size: 17px;
+    width: 300px;
+    height: auto;
+    margin-left: auto;
+    margin-right:auto;
+    position: relative;
+    text-align: center;
+ 
+}
+#questionNo{                
+    text-align: center;
+    width: 150px;
+    height: 20px;
+    margin-left: 70px;
+    margin-right: auto;
+
+}
+#Checker:hover{              
+   background-color: #00b3b3;
+  
+}
+#Checker{                  
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+#four{ 
+    margin-bottom: 15px;
+
+}
+#numbers{
+    grid-area: questionNumbers;
+}
+#answers{
+    grid-area: answers;
+}
+#status{
+    grid-area: status;
+}
+#questionsPrint{
+    grid-area: questions;
+}
+#quizAnswers{             
+    
+    display: none;
+    grid-template-areas:
+        'questionNumbers  questions answers status'; /*using a css grid to display the answers , answer status along with question and the question number */
+    grid-gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    border: solid;
+    background-color: black;
+    color:white;
+    opacity: 0.8;
+    font-size: 20px;
+}
+#numbers{
+    text-align: center;
+}
